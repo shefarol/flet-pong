@@ -4,28 +4,36 @@ on:
   push:
     branches:
       - main
+
   workflow_dispatch:
+
+env:
+  UV_PYTHON: "3.14"
+  PYTHONUTF8: "1"
 
 jobs:
   build-apk:
+
     runs-on: ubuntu-latest
 
     steps:
+
       - name: Baixar o projeto
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
+
+      - name: Configurar Python e uv
+        uses: astral-sh/setup-uv@v6
+        with:
+          python-version: "3.14"
 
       - name: Gerar APK
-        id: build
-        uses: flet-dev/flet-build-action@v1
-        with:
-          target: apk
-          runner-python-version: "3.14"
-          bundled-python-version: "3.14"
-          build-number: ${{ github.run_number }}
+        run: |
+          uv run flet build apk --yes --verbose
 
       - name: Disponibilizar APK
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: pong-apk
-          path: ${{ steps.build.outputs.archive-path }}
+          path: build/apk
           if-no-files-found: error
+          overwrite: true
