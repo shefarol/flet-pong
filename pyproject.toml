@@ -9,3 +9,7 @@ dependencies = [
 
 [tool.flet]
 product = "Pong"
+
+[tool.flet.app]
+path = "src"
+module = "pong.py"
