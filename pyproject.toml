@@ -1,0 +1,11 @@
+[project]
+name = "pong"
+version = "1.0.0"
+description = "Jogo Pong desenvolvido com Python e Flet"
+requires-python = ">=3.13,<3.15"
+dependencies = [
+    "flet==0.86.5"
+]
+
+[tool.flet]
+product = "Pong"
