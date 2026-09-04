@@ -28,7 +28,7 @@ jobs:
 
       - name: Gerar APK
         run: |
-          uv run flet build apk --yes --verbose
+          uv run flet build apk --yes --verbose --skip-flutter-doctor
 
       - name: Disponibilizar APK
         uses: actions/upload-artifact@v7
